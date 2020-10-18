@@ -1,6 +1,10 @@
 {
   "name": "ponttor-frontend-project-lvl2",
+<<<<<<< HEAD
   "version": "1.0.2",
+=======
+  "version": "1.0.1",
+>>>>>>> 04a8b537118796afa3defa26ce81e0b481cfd930
   "description": "Gendiff to compare two files, such as YML, INI, JSON",
   "main": "index.js",
   "bin": {
