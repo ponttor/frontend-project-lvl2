@@ -1,0 +1,26 @@
+{
+  "name": "ponttor-frontend-project-lvl2",
+  "version": "1.0.1",
+  "description": "Gendiff to compare two files, such as YML, INI, JSON",
+  "main": "index.js",
+  "bin": {
+    "gendiff": "src/bin/gendiff.js"
+  },
+  "dependencies": {
+    "commander": "^6.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ponttor/frontend-project-lvl2.git"
+  },
+  "author": "ponttor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ponttor/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/ponttor/frontend-project-lvl2#readme"
+}
