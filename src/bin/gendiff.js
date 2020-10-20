@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-import { Command } from 'commander';
+import pkg from 'commander';
+const { Command } = pkg;
 
 const program = new Command();
 
 program
-  .option('-a', 'option a')
+.version('0.0.1', '-v, --vers', 'output the version number')
+.description('Compares two configuration files and shows a difference.');
 
-if (program.a) {
-    console.log(program.a)
-}
+program.parse(process.argv);
