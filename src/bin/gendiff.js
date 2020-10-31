@@ -1,13 +1,18 @@
 #!/usr/bin/env node
-import pkg from 'commander';
-const { Command } = pkg;
+
+import getDiff from '../getDiff.js';
+import commander from 'commander';
+const { Command } = commander;
 
 const program = new Command();
 
 program
-.version('0.0.1', '-v, --vers', 'output the version number')
-.description('Compares two configuration files and shows a difference.')
-.option('-f, --format [type]', 'Output format')
-.arguments('<filepath1> <filepath2>');
+  .version('0.0.1')
+  .description('Compares two configuration files and shows a difference.')
+  .option('-f, --format [type]', 'Output format')
+  .arguments('<filepath1> <filepath2>')
+  .action((file1, file2) => {
+    console.log(getDiff(file1, file2));
+});
 
-program.parse(process.argv);
+  program.parse(process.argv);
