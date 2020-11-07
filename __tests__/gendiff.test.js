@@ -1,18 +1,22 @@
+/* eslint-disable no-underscore-dangle */
 // import { strict as assert } from 'assert';
 import { test, expect } from '@jest/globals';
-// import path from 'path';
+import path, { dirname } from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 import getDiff from '../src/getDiff';
 
-// assert(getDiff('file_source/file1.json', 'file_source/file2.json') ===
-// fs.readFileSync('file_source/fileDiff.txt', 'utf-8'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-// const getPath = (name) => path.join(__dirname, name);
-// const filePath1 = getPath('file_source/file1.json');
-// const filePath2 = getPath('file_source/file2.json');
-// console.log(filePath1);
-// console.log(filePath2);
+const getFixturePath = (filename) => path.join(__dirname, '__fixtures__', filename);
+
+const filePath1 = getFixturePath('file1.json');
+const filePath2 = getFixturePath('file2.json');
+const fileDiffPath = getFixturePath('fileDiff.txt');
+
+const fileDiff = fs.readFileSync(fileDiffPath, 'utf-8');
 
 test('compare json', () => {
-  expect(getDiff('file_source/file1.json', 'file_source/file2.json')).toEqual(fs.readFileSync('file_source/fileDiff.txt', 'utf-8'));
+  expect(getDiff(filePath1, filePath2)).toEqual(fileDiff);
 });
