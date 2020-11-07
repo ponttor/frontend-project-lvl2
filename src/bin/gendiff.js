@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-
-import getDiff from '../getDiff.js';
+/* eslint-disable no-console */
+/* eslint-disable import/extensions */
 import commander from 'commander';
+import getDiff from '../getDiff.js';
+
 const { Command } = commander;
 
 const program = new Command();
@@ -13,6 +15,6 @@ program
   .arguments('<filepath1> <filepath2>')
   .action((file1, file2) => {
     console.log(getDiff(file1, file2));
-});
+  });
 
-  program.parse(process.argv);
+program.parse(process.argv);
