@@ -1,17 +1,11 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
 import _ from 'lodash';
-import fs from 'fs';
 
-const render = JSON.parse;
+// const render = JSON.parse;
 
-const getDiff = (path1, path2) => {
-  const text1 = fs.readFileSync(path1, 'utf8');
-  const object1 = render(text1);
-
-  const text2 = fs.readFileSync(path2, 'utf8');
-  const object2 = render(text2);
-
+const getDiff = (object1, object2) => {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
 

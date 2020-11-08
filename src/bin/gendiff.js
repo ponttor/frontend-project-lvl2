@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import commander from 'commander';
-import getDiff from '../getDiff.js';
+import genDiff from '../index.js';
 
 const { Command } = commander;
 
@@ -14,7 +14,7 @@ program
   .option('-f, --format [type]', 'Output format')
   .arguments('<filepath1> <filepath2>')
   .action((file1, file2) => {
-    console.log(getDiff(file1, file2));
+    console.log(genDiff(file1, file2));
   });
 
 program.parse(process.argv);
