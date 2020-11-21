@@ -10,7 +10,7 @@ const render = (data, format) => {
     const getRender = yaml.safeLoad;
     return getRender(data);
   }
-  return console.log('Error');
+  throw new Error(`Unknown format: ${format}`);
 };
 
 export default render;

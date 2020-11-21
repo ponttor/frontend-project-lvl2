@@ -3,32 +3,41 @@
 /* eslint-disable no-restricted-syntax */
 import _ from 'lodash';
 
-// const render = JSON.parse;
-
 const getDiff = (object1, object2) => {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
+  const keys = _.union(keys1, keys2).sort();
 
-  const keys = _.union(keys1, keys2);
-  keys.sort();
-  let result = '{\n';
-  for (const key of keys) {
-    if (object1[key] === object2[key]) {
-      result += `    ${key}: ${object1[key]}\n`;
+  const diffTree = keys.map((key) => {
+    const isInObject1 = _.has(object1, key);
+    const isInObject2 = _.has(object2, key);
+
+    const value1 = object1[key];
+    const value2 = object2[key];
+
+    if (isInObject1 && !isInObject2) {
+      return { action: 'deleted', key, value: value1 };
     }
-    if ((object1[key] !== object2[key]) && (_.has(object1, key)) && (_.has(object2, key))) {
-      result += `  - ${key}: ${object1[key]}\n`;
-      result += `  + ${key}: ${object2[key]}\n`;
+
+    if (isInObject2 && !isInObject1) {
+      return { action: 'added', key, value: value2 };
     }
-    if ((object1[key] !== object2[key]) && (_.has(object1, key)) && (object2[key] === undefined)) {
-      result += `  - ${key}: ${object1[key]}\n`;
+
+    const value1IsObject = _.isObject(value1);
+    const value2IsObject = _.isObject(value2);
+
+    if (value1IsObject && value2IsObject) {
+      return { action: 'objects', key, children: getDiff(value1, value2) };
     }
-    if ((object1[key] !== object2[key]) && (_.has(object2, key)) && (object1[key] === undefined)) {
-      result += `  + ${key}: ${object2[key]}\n`;
+
+    if (value1 === value2) {
+      return { action: 'same', key, value: value1 };
     }
-  }
-  result += '}';
-  return result;
+    return {
+      action: 'updated', key, value1, value2,
+    };
+  });
+  return diffTree;
 };
 
 export default getDiff;
