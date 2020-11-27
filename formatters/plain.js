@@ -28,7 +28,7 @@ const deleted = (key, acc) => {
 const plainFormat = (data) => {
   const convertedData = data.map((segment) => {
     const {
-      action, key, value, value1, value2, children, acc,
+      action, key, value1, value2, children, acc,
     } = segment;
     if (action === 'deleted') {
       return deleted(key, acc.substr(1));
