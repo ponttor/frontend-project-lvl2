@@ -34,7 +34,7 @@ const plainFormat = (data) => {
       return deleted(key, acc.substr(1));
     }
     if (action === 'added') {
-      return added(acc.substr(1), key, value);
+      return added(acc.substr(1), key, value2);
     }
     if (action === 'objects') {
       return `${plainFormat(children)}`;

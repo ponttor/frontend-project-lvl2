@@ -22,20 +22,20 @@ const stylishFormat = (data) => {
   const goDeep = (object, shift) => {
     const convertedData = object.map((segment) => {
       const {
-        action, key, value, value1, value2, children,
+        action, key, value1, value2, children,
       } = segment;
 
-      const stringValue = stringify(value, shift - 2);
+      // const stringValue = stringify(value, shift - 2);
       const stringValue1 = stringify(value1, shift - 2);
-      const stringValue2 = stringify(value2, shift - 4);
+      const stringValue2 = stringify(value2, shift - 2);
 
       const space2 = '  ';
       const str = ' '.repeat(shift);
       if (action === 'deleted') {
-        return `${str}- ${key}: ${stringValue}`;
+        return `${str}- ${key}: ${stringValue1}`;
       }
       if (action === 'added') {
-        return `${str}+ ${key}: ${stringValue}`;
+        return `${str}+ ${key}: ${stringValue2}`;
       }
       if (action === 'objects') {
         return `${str}  ${key}: {\n${goDeep(children, shift + 4)}\n${str}${space2}}`;
@@ -44,7 +44,7 @@ const stylishFormat = (data) => {
         return `${str}- ${key}: ${stringValue1}\n${str}+ ${key}: ${stringValue2}`;
       }
       if (action === 'same') {
-        return `${str}  ${key}: ${stringValue}`;
+        return `${str}  ${key}: ${stringValue1}`;
       }
       return console.log(`Unknown action: ${action}`);
     });

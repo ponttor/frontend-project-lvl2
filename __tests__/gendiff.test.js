@@ -21,9 +21,13 @@ const ymlTreePath1 = getFixturePath('fileTree1.yml');
 const ymlTreePath2 = getFixturePath('fileTree2.yml');
 const fileDiffPath = getFixturePath('fileDiff.txt');
 const fileTreeDiffPath = getFixturePath('fileTreediff.txt');
+const plainDiffPath = getFixturePath('plainDiff.txt');
+const jsonDiffPath = getFixturePath('fileJson.txt');
 
 const fileDiff = fs.readFileSync(fileDiffPath, 'utf-8');
 const fileTreeDiff = fs.readFileSync(fileTreeDiffPath, 'utf-8');
+const plainDiff = fs.readFileSync(plainDiffPath, 'utf-8');
+const jsonDiff = fs.readFileSync(jsonDiffPath, 'utf-8');
 
 test('compare json', () => {
   expect(genDiff(jsonPath1, jsonPath2)).toEqual(fileDiff);
@@ -39,4 +43,12 @@ test('compare json trees', () => {
 
 test('compare yml trees', () => {
   expect(genDiff(ymlTreePath1, ymlTreePath2)).toEqual(fileTreeDiff);
+});
+
+test('plain format', () => {
+  expect(genDiff(jsonTreePath1, jsonTreePath2, 'plain')).toEqual(plainDiff);
+});
+
+test('json format', () => {
+  expect(genDiff(jsonTreePath1, jsonTreePath2, 'json')).toEqual(jsonDiff);
 });
