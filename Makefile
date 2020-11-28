@@ -5,9 +5,9 @@ lint:
 	npx eslint .
 
 test:
-	npx -n --experimental-vm-modules -n --no-warnings jest
+	npm test
 
 test-coverage:
-	npx -n --experimental-vm-modules -n --no-warnings jest -- --coverage --coverageProvider=v8
+	npm test -- --coverage --coverageProvider=v8
 
 .PHONY: test
