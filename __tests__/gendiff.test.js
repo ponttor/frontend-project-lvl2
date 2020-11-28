@@ -50,5 +50,6 @@ test('plain format', () => {
 });
 
 test('json format', () => {
+  // console.log(genDiff(jsonTreePath1, jsonTreePath2, 'json'));
   expect(genDiff(jsonTreePath1, jsonTreePath2, 'json')).toEqual(jsonDiff);
 });

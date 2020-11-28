@@ -47,9 +47,7 @@ const plainFormat = (data) => {
     }
     return console.log(`Unknown action: ${action}`);
   });
-  const a = convertedData.filter((element) => element !== null).join('\n');
-  return `\n${a}`;
-  // return convertedData.filter((element) => element !== null).join('\n');
+  return convertedData.filter((element) => element !== null).join('\n');
 };
 
 export default plainFormat;
