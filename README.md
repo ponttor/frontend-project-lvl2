@@ -8,18 +8,26 @@ Generator of Differences
 
 
 Description
+
 Compares two configuration files and shows a difference.
 
+
 Installation
+
 $ npm i ponttor-frontend-project-lvl2
 
+
 Usage
+
 $ gendiff [format] <first_config> <second_config>
 
+
 Formats
+
 -h, --help          Output usage information
 -V, --version       Output the version number
 -f, --format [type] Output format [plain, string, json]
+
 
 <a href="https://asciinema.org/a/goQ26LpPg1rMLZxq1jtfn2KU9" target="_blank"><img src="https://asciinema.org/a/goQ26LpPg1rMLZxq1jtfn2KU9.svg" /></a>
 
