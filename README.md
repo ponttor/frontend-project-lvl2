@@ -24,9 +24,11 @@ $ gendiff [format] <first_config> <second_config>
 
 Formats
 
--h, --help          Output usage information
--V, --version       Output the version number
--f, --format [type] Output format [plain, string, json]
+-h, --help:          Output usage information
+
+-V, --version:       Output the version number
+
+-f, --format [type]: Output format [plain, string, json]
 
 
 <a href="https://asciinema.org/a/goQ26LpPg1rMLZxq1jtfn2KU9" target="_blank"><img src="https://asciinema.org/a/goQ26LpPg1rMLZxq1jtfn2KU9.svg" /></a>
