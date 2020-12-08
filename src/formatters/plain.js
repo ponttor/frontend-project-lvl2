@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import _ from 'lodash';
 
 const stringify = (value) => {
@@ -17,7 +16,14 @@ const added = (acc, key, value) => {
   }
   return `Property '${acc}.${key}' was added with value: ${stringify(value)}`;
 };
-const updated = (key, acc, value1, value2) => `Property '${acc}.${key}' was updated. From ${stringify(value1)} to ${stringify(value2)}`;
+
+const updated = (key, acc, value1, value2) => {
+  if (acc === '') {
+    return `Property '${key}' was updated. From ${stringify(value1)} to ${stringify(value2)}`;
+  }
+  return `Property '${acc}.${key}' was updated. From ${stringify(value1)} to ${stringify(value2)}`;
+};
+
 const deleted = (key, acc) => {
   if (acc === '') {
     return `Property '${key}' was removed`;

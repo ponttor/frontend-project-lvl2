@@ -1,9 +1,8 @@
-/* eslint-disable import/extensions */
 import fs from 'fs';
 import path from 'path';
-import render from './parsers/index.js';
+import render from './parsers.js';
 import getDiff from './getDiff.js';
-import getFormat from '../formatters/index.js';
+import getFormat from './formatters/index.js';
 
 const genDiff = (filePath1, filePath2, format) => {
   const text1 = fs.readFileSync(filePath1, 'utf8');
@@ -18,7 +17,6 @@ const genDiff = (filePath1, filePath2, format) => {
   const difference = getDiff(data1, data2, '');
   const result = getFormat(difference, format);
   return result;
-  // return convert(difference);
 };
 
 export default genDiff;

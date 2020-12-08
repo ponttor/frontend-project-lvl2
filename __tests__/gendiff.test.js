@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-// import { strict as assert } from 'assert';
+
+import _ from 'lodash';
 import { test, expect } from '@jest/globals';
 import path, { dirname } from 'path';
 import fs from 'fs';
@@ -11,45 +12,26 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '__fixtures__', filename);
 
-const jsonPath1 = getFixturePath('file1.json');
-const jsonPath2 = getFixturePath('file2.json');
-const ymlPath1 = getFixturePath('file1.yml');
-const ymlPath2 = getFixturePath('file2.yml');
 const jsonTreePath1 = getFixturePath('fileTree1.json');
 const jsonTreePath2 = getFixturePath('fileTree2.json');
 const ymlTreePath1 = getFixturePath('fileTree1.yml');
 const ymlTreePath2 = getFixturePath('fileTree2.yml');
-const fileDiffPath = getFixturePath('fileDiff.txt');
 const fileTreeDiffPath = getFixturePath('fileTreediff.txt');
 const plainDiffPath = getFixturePath('plainDiff.txt');
 const jsonDiffPath = getFixturePath('fileJson.txt');
 
-const fileDiff = fs.readFileSync(fileDiffPath, 'utf-8');
 const fileTreeDiff = fs.readFileSync(fileTreeDiffPath, 'utf-8');
 const plainDiff = fs.readFileSync(plainDiffPath, 'utf-8');
 const jsonDiff = fs.readFileSync(jsonDiffPath, 'utf-8');
 
-test('compare json', () => {
-  expect(genDiff(jsonPath1, jsonPath2)).toEqual(fileDiff);
-});
+const coll = [fileTreeDiff, jsonDiff, plainDiff];
 
-test('compare yml', () => {
-  expect(genDiff(ymlPath1, ymlPath2)).toEqual(fileDiff);
-});
-
-test('compare json trees', () => {
-  expect(genDiff(jsonTreePath1, jsonTreePath2)).toEqual(fileTreeDiff);
-});
-
-test('compare yml trees', () => {
-  expect(genDiff(ymlTreePath1, ymlTreePath2)).toEqual(fileTreeDiff);
-});
-
-test('plain format', () => {
-  expect(genDiff(jsonTreePath1, jsonTreePath2, 'plain')).toEqual(plainDiff);
-});
-
-test('json format', () => {
-  // console.log(genDiff(jsonTreePath1, jsonTreePath2, 'json'));
-  expect(genDiff(jsonTreePath1, jsonTreePath2, 'json')).toEqual(jsonDiff);
-});
+test.each([[jsonTreePath1, jsonTreePath2],
+  [ymlTreePath1, ymlTreePath2]])(
+  'compare files, plain and json format',
+  (file1, file2) => {
+    expect(_.includes(coll, genDiff(file1, file2))).toBe(true);
+    expect(_.includes(coll, genDiff(file1, file2, 'plain'))).toBe(true);
+    expect(_.includes(coll, genDiff(file1, file2, 'json'))).toBe(true);
+  },
+);
