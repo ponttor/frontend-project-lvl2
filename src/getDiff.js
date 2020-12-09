@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const getDiff = (object1, object2, acc) => {
+const getDiff = (object1, object2) => {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
   const keys = _.union(keys1, keys2).sort();
@@ -14,12 +14,12 @@ const getDiff = (object1, object2, acc) => {
 
     if (isInObject1 && !isInObject2) {
       return {
-        action: 'deleted', key, value1, value2: '', acc,
+        action: 'deleted', key, value1, value2: '',
       };
     }
     if (isInObject2 && !isInObject1) {
       return {
-        action: 'added', key, value1: '', value2, acc,
+        action: 'added', key, value1: '', value2,
       };
     }
 
@@ -27,16 +27,16 @@ const getDiff = (object1, object2, acc) => {
     const value2IsObject = _.isObject(value2);
 
     if (value1IsObject && value2IsObject) {
-      return { action: 'objects', key, children: getDiff(value1, value2, `${acc}.${key}`) };
+      return { action: 'objects', key, children: getDiff(value1, value2, `${key}`) };
     }
 
     if (value1 === value2) {
       return {
-        action: 'same', key, value1, value2: '', acc,
+        action: 'same', key, value1, value2: '',
       };
     }
     return {
-      action: 'updated', key, value1, value2, acc,
+      action: 'updated', key, value1, value2,
     };
   });
   return diffTree;
