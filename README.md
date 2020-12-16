@@ -35,10 +35,6 @@ Formats
 -f, --format [type]: Output format [plain, string, json]
 
 
-<a href="https://asciinema.org/a/goQ26LpPg1rMLZxq1jtfn2KU9" target="_blank"><img src="https://asciinema.org/a/goQ26LpPg1rMLZxq1jtfn2KU9.svg" /></a>
-
-<a href="https://asciinema.org/a/6NgbT9F7dxQYWEBgossceyRsG" target="_blank"><img src="https://asciinema.org/a/6NgbT9F7dxQYWEBgossceyRsG.svg" /></a>
-
 <a href="https://asciinema.org/a/mlcFZ3O5FjUbF3lZnxLF6M3DB" target="_blank"><img src="https://asciinema.org/a/mlcFZ3O5FjUbF3lZnxLF6M3DB.svg" /></a>
 
 <a href="https://asciinema.org/a/ViiCFOVnOePtpNuxIZPYGChoo" target="_blank"><img src="https://asciinema.org/a/ViiCFOVnOePtpNuxIZPYGChoo.svg" /></a>

@@ -1,6 +1,6 @@
 import yaml from 'js-yaml';
 
-const render = (data, format) => {
+const parse = (data, format) => {
   switch (format) {
     case 'json':
       return JSON.parse(data);
@@ -11,4 +11,4 @@ const render = (data, format) => {
   }
 };
 
-export default render;
+export default parse;

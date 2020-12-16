@@ -1,55 +1,56 @@
 import _ from 'lodash';
 
-const stringify = (value, shift) => {
-  const internal = (internalValue, shift2, bracketShift2) => {
-    const str = ' '.repeat(shift2);
-    const closeStr = ' '.repeat(bracketShift2);
-    if (!_.isObject(internalValue)) {
-      return internalValue;
+const indentBracket = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount + 2);
+const indentKey = (depth) => ' '.repeat(8 + 4 * depth);
+
+const stringify = (value, depth) => {
+  const internal = (tree, deep) => {
+    const str = indentBracket(deep);
+    const strKey = indentKey(deep);
+    if (!_.isObject(tree)) {
+      return tree;
     }
-    const keys = _.keys(internalValue);
+    const keys = _.keys(tree);
     const result = keys.map((key) => {
-      const content = internalValue[key];
-      return `${str}${key}: ${internal(content, shift2 + 4, bracketShift2 + 4)}`;
+      const content = tree[key];
+      return `${strKey}${key}: ${internal(content, deep + 1)}`;
     }).join('\n');
-    return `{\n${result}\n${closeStr}}`;
+    return `{\n${result}\n${str}  }`;
   };
-  return internal(value, shift + 8, shift + 4);
+  return internal(value, depth);
 };
 
 const stylishFormat = (data) => {
-  const goDeep = (object, shift) => {
+  const iter = (object, depth) => {
     const convertedData = object.map((segment) => {
       const {
-        action, key, value1, value2, children,
+        action, key, value, value1, value2, children,
       } = segment;
 
-      // const stringValue = stringify(value, shift - 2);
-      const stringValue1 = stringify(value1, shift - 2);
-      const stringValue2 = stringify(value2, shift - 2);
+      const stringValue = stringify(value, depth);
+      const stringValue1 = stringify(value1, depth);
+      const stringValue2 = stringify(value2, depth);
 
-      const space2 = '  ';
-      const str = ' '.repeat(shift);
-      if (action === 'deleted') {
-        return `${str}- ${key}: ${stringValue1}`;
+      const str = indentBracket(depth);
+
+      switch (action) {
+        case 'deleted':
+          return `${str}- ${key}: ${stringValue}`;
+        case 'added':
+          return `${str}+ ${key}: ${stringValue}`;
+        case 'nested':
+          return `${str}  ${key}: {\n${iter(children, depth + 1)}\n${str}  }`;
+        case 'updated':
+          return `${str}- ${key}: ${stringValue1}\n${str}+ ${key}: ${stringValue2}`;
+        case 'unchanged':
+          return `${str}  ${key}: ${stringValue}`;
+        default:
+          throw new Error(`Unknown action: ${action}`);
       }
-      if (action === 'added') {
-        return `${str}+ ${key}: ${stringValue2}`;
-      }
-      if (action === 'objects') {
-        return `${str}  ${key}: {\n${goDeep(children, shift + 4)}\n${str}${space2}}`;
-      }
-      if (action === 'updated') {
-        return `${str}- ${key}: ${stringValue1}\n${str}+ ${key}: ${stringValue2}`;
-      }
-      if (action === 'same') {
-        return `${str}  ${key}: ${stringValue1}`;
-      }
-      return console.log(`Unknown action: ${action}`);
     });
     return convertedData.join('\n');
   };
-  return `{\n${goDeep(data, 2)}\n}`;
+  return `{\n${iter(data, 0)}\n}`;
 };
 
 export default stylishFormat;
