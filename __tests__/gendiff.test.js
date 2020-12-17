@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 
-// import { test, expect } from '@jest/globals';
 import path, { dirname } from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
