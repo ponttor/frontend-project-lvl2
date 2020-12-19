@@ -8,8 +8,10 @@ const getFormat = (data, format) => {
       return plainFormat(data);
     case 'json':
       return jsonFormat(data);
-    default:
+    case 'stylish':
       return stylishFormat(data);
+    default:
+      throw new Error(`unknown format: ${format}`);
   }
 };
 

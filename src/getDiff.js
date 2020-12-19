@@ -7,27 +7,23 @@ const getDiff = (object1, object2) => {
   const keysSorted = _.sortBy(keys);
 
   const diffTree = keysSorted.map((key) => {
-    const isInObject1 = _.has(object1, key);
-    const isInObject2 = _.has(object2, key);
-
-    const value1 = (isInObject1) ? object1[key] : object1[key];
-    const value2 = (isInObject2) ? object2[key] : object2[key];
-
-    if (!isInObject2) {
+    if (!_.has(object2, key)) {
+      const value = object1[key];
       return {
-        action: 'deleted', key, value: value1,
+        action: 'deleted', key, value,
       };
     }
-    if (!isInObject1) {
+    if (!_.has(object1, key)) {
+      const value = object2[key];
       return {
-        action: 'added', key, value: value2,
+        action: 'added', key, value,
       };
     }
 
-    const value1IsObject = _.isPlainObject(value1);
-    const value2IsObject = _.isPlainObject(value2);
+    const value1 = object1[key];
+    const value2 = object2[key];
 
-    if (value1IsObject && value2IsObject) {
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return { action: 'nested', key, children: getDiff(value1, value2) };
     }
 

@@ -1,8 +1,8 @@
 {
-  "name": "ponttor-frontend-project-lvl2",
-  "version": "1.0.9",
+  "name": "@hexlet/code",
+  "version": "1.0.10",
   "description": "Compares two configuration files and shows a difference",
-  "main": "index.js",
+  "main": "bin/getdiff.js",
   "type": "module",
   "bin": {
     "gendiff": "src/bin/gendiff.js"
