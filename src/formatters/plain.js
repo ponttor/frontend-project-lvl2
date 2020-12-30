@@ -5,7 +5,8 @@ const stringify = (value) => {
     return value;
   }
   if (!_.isObject(value)) {
-    return `${value}`;
+    const result = (_.isNumber(value)) ? `${value}` : `'${value}'`;
+    return result;
   }
   return '[complex value]';
 };
