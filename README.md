@@ -40,3 +40,5 @@ Formats
 <a href="https://asciinema.org/a/ViiCFOVnOePtpNuxIZPYGChoo" target="_blank"><img src="https://asciinema.org/a/ViiCFOVnOePtpNuxIZPYGChoo.svg" /></a>
 
 <a href="https://asciinema.org/a/uluI9fLJMWYxZrRjW6ekcMxFD" target="_blank"><img src="https://asciinema.org/a/uluI9fLJMWYxZrRjW6ekcMxFD.svg" /></a>
+
+<a href="https://hexlet.io/a/uluI9fLJMWYxZrRjW6ekcMxFD" target="_blank"><img src="https://hexlet.io/a/uluI9fLJMWYxZrRjW6ekcMxFD.svg" /></a>
