@@ -6,6 +6,8 @@ Generator of Differences
 
 <a href="https://github.com/ponttor/frontend-project-lvl2/actions"><img alt="javscript-action status" src="https://github.com/ponttor/frontend-project-lvl2/workflows/Node%20CI/badge.svg"></a>
 
+<a href="https://github.com/ponttor/frontend-project-lvl2/actions"><img alt="javscript-action status" src="https://github.com/ponttor/frontend-project-lvl2/workflows/hexlet-check/badge.svg"></a>
+
 
 Description
 
@@ -40,5 +42,3 @@ Formats
 <a href="https://asciinema.org/a/ViiCFOVnOePtpNuxIZPYGChoo" target="_blank"><img src="https://asciinema.org/a/ViiCFOVnOePtpNuxIZPYGChoo.svg" /></a>
 
 <a href="https://asciinema.org/a/uluI9fLJMWYxZrRjW6ekcMxFD" target="_blank"><img src="https://asciinema.org/a/uluI9fLJMWYxZrRjW6ekcMxFD.svg" /></a>
-
-<a href="https://hexlet.io/a/uluI9fLJMWYxZrRjW6ekcMxFD" target="_blank"><img src="https://hexlet.io/a/uluI9fLJMWYxZrRjW6ekcMxFD.svg" /></a>
