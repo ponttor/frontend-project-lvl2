@@ -9,15 +9,15 @@ const stringify = (value) => {
   }
   return '[complex value]';
 };
-const plainFormat = (data) => {
+const formatPlain = (data) => {
   const format = (object, acc) => {
     const convertedData = object.map((segment) => {
       const {
-        action, key, value, value1, value2, children,
+        type, key, value, value1, value2, children,
       } = segment;
       const newAcc = [...acc, key];
 
-      switch (action) {
+      switch (type) {
         case 'deleted':
           return `Property '${newAcc.join('.')}' was removed`;
         case 'added':
@@ -29,11 +29,11 @@ const plainFormat = (data) => {
         case 'unchanged':
           return null;
         default:
-          throw new Error(`Unknown action: ${action}`);
+          throw new Error(`Unknown action: ${type}`);
       }
     });
     return convertedData.filter((element) => element !== null).join('\n');
   };
   return format(data, []);
 };
-export default plainFormat;
+export default formatPlain;

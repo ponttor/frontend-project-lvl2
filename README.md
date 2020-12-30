@@ -15,7 +15,7 @@ Compares two configuration files and shows a difference.
 Installation
 
 ```
-$ npm i ponttor-frontend-project-lvl2
+$ make install
 ```
 
 

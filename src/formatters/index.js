@@ -1,18 +1,18 @@
-import plainFormat from './plain.js';
-import stylishFormat from './stylish.js';
-import jsonFormat from './json.js';
+import formatPlain from './plain.js';
+import formatStylish from './stylish.js';
+import formatJson from './json.js';
 
-const getFormat = (data, format) => {
-  switch (format) {
+const format = (data, type) => {
+  switch (type) {
     case 'plain':
-      return plainFormat(data);
+      return formatPlain(data);
     case 'json':
-      return jsonFormat(data);
+      return formatJson(data);
     case 'stylish':
-      return stylishFormat(data);
+      return formatStylish(data);
     default:
       throw new Error(`unknown format: ${format}`);
   }
 };
 
-export default getFormat;
+export default format;

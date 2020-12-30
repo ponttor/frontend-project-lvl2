@@ -1,39 +1,37 @@
 import _ from 'lodash';
 
-const indentBracket = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount + 2);
-const indentKey = (depth) => ' '.repeat(8 + 4 * depth);
+const indent = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount - 2);
 
 const stringify = (value, depth) => {
   const internal = (tree, deep) => {
-    const str = indentBracket(deep);
-    const strKey = indentKey(deep);
+    const str = indent(deep);
     if (!_.isObject(tree)) {
       return tree;
     }
     const keys = _.keys(tree);
     const result = keys.map((key) => {
       const content = tree[key];
-      return `${strKey}${key}: ${internal(content, deep + 1)}`;
+      return `${str}  ${key}: ${internal(content, deep + 1)}`;
     }).join('\n');
-    return `{\n${result}\n${str}  }`;
+    return `{\n${result}\n${indent(deep - 1)}  }`;
   };
-  return internal(value, depth);
+  return internal(value, depth + 1);
 };
 
 const stylishFormat = (data) => {
   const iter = (object, depth) => {
     const convertedData = object.map((segment) => {
       const {
-        action, key, value, value1, value2, children,
+        type, key, value, value1, value2, children,
       } = segment;
 
       const stringValue = stringify(value, depth);
       const stringValue1 = stringify(value1, depth);
       const stringValue2 = stringify(value2, depth);
 
-      const str = indentBracket(depth);
+      const str = indent(depth);
 
-      switch (action) {
+      switch (type) {
         case 'deleted':
           return `${str}- ${key}: ${stringValue}`;
         case 'added':
@@ -45,12 +43,12 @@ const stylishFormat = (data) => {
         case 'unchanged':
           return `${str}  ${key}: ${stringValue}`;
         default:
-          throw new Error(`Unknown action: ${action}`);
+          throw new Error(`Unknown type: ${type}`);
       }
     });
     return convertedData.join('\n');
   };
-  return `{\n${iter(data, 0)}\n}`;
+  return `{\n${iter(data, 1)}\n}`;
 };
 
 export default stylishFormat;
